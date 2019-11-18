@@ -1,20 +1,20 @@
 #Download all the files specified in data/filenames
-for url in $(cat /home/user02/Desktop/examenLinux/decont/data/urls) #TODO
-do
-    bash /home/user02/Desktop/examenLinux/decont/scripts/download.sh $url data
-done
+#for url in $(cat /home/user02/Desktop/examenLinux/decont/data/urls) #TODO
+#do
+#    bash /home/user02/Desktop/examenLinux/decont/scripts/download.sh $url data
+#done
 
 # Download the contaminants fasta file, and uncompress it
-#bash scripts/download.sh <contaminants_url> res yes #TODO
+#bash /home/user02/Desktop/examenLinux/decont/scripts/download.sh https://bioinformatics.cnio.es/data/courses/decont/contaminants.fasta.gz res yes #TODO
 
 # Index the contaminants file
-#bash scripts/index.sh res/contaminants.fasta res/contaminants_idx
+#bash /home/user02/Desktop/examenLinux/decont/scripts/index.sh res/contaminants.fasta res/contaminants_idx
 
 # Merge the samples into a single file
-#for sid in $(<list_of_sample_ids) #TODO
-#do
-#    bash scripts/merge_fastqs.sh data out/merged $sid
-#done
+for sid in $(ls data/*.fastq | cut -d "_" -f1 | sed 's:data/::' | sort | uniq) #TODO
+do
+    bash scripts/merge_fastqs.sh data out/merged $sid
+done
 
 # TODO: run cutadapt for all merged files
 # cutadapt -m 18 -a TGGAATTCTCGGGTGCCAAGG --discard-untrimmed -o <trimmed_file> <input_file> > <log_file>
