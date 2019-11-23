@@ -1,14 +1,9 @@
 # This script should merge all files from a given sample (the sample id is provided in the third argument)
 # into a single file, which should be stored in the output directory specified by the second argument.
 # The directory containing the samples is indicated by the first argument.
-echo $1
-echo $2
-echo $3
-contador=1
-for i in $(find data -name "*$3*tq")
-do 
-	documento$contador=`$i`
-	contador=$contador+1
-done
-#cat file1.tar.gz file2.tar.gz > merged.tar.gz
-echo $documento1
+
+#cd data
+cat $(ls $1/*$3*.fastq.gz) > $2/$3merged.tar.gz
+#gunzip -k $2/$3merged.tar.gz
+#Star por defecto el log lo deja en log out y el cutadapt hay que ponerselo
+#Poner condicional si es "Yes" entonces descomprim¿?. myvar=$(comando)!!!!!!
